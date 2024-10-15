@@ -25,15 +25,15 @@ def train(rank, world_size):
     
     setup_distributed(rank, world_size)
     
-    model = SimpleModel().to(rank)
+    model = SimpleModel()#.to(rank)
     ddp_model = DDP(model, device_ids=[rank])
 
     loss_fn = nn.MSELoss()
     optimizer = optim.SGD(ddp_model.parameters(), lr=0.01)
     
     # Dummy input
-    inputs = torch.randn(20, 10).to(rank)
-    targets = torch.randn(20, 10).to(rank)
+    inputs = torch.randn(20, 10)#.to(rank)
+    targets = torch.randn(20, 10)#.to(rank)
     
     for epoch in range(10):  # Training loop
         optimizer.zero_grad()
